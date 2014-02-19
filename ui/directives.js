@@ -10,26 +10,24 @@ angular.module('getUpStandUp', [])
 			restrict: 'A',
 			templateUrl: 'ui/postbox.html',
 			link: function(scope, element, attr) {
-				scope.icons = {
-					'fi-pencil': '#53A93F',
-					'fi-link': '#FFCE3F',
-					'fi-photo': '#3079ED',
-					'fi-video': '#CB4437',
+				scope.postType = 'Text'
+				scope.postTypes = ['Text', 'Link', 'Photo', 'Video'];
+				scope.postData = {
+					'Text' : {name:'fi-pencil', color:'#53A93F'},
+					'Link': {name:'fi-link', color:'#FFCE3F'},
+					'Photo': {name:'fi-photo', color:'#3079ED'},
+					'Video': {name:'fi-video', color:'#CB4437'},
 				};
-				element.addClass('postbox');
-				element.find('i').on('click', function($event) {
-					var id = angular.element($event.target).attr('class');
+				scope.postStyle = function(type) {
+					if (scope.postType == type) return {color : scope.postData[type].color};
+					return '';
+				}
+				scope.showUrl = function() {
+					if (scope.postType == 'Text' || scope.postType == 'Photo') return false;
+					return true;
+				}
 
-					// Loop over every icon and remove the style except this one.
-					angular.forEach(element.find('i'), function(v, k) {
-						var target = angular.element(v);
-						if (id == target.attr('class')) {
-							target.attr('style', 'color: ' + scope.icons[id]);
-							return;
-						}
-						target.attr('style', '');
-					});
-				});
+				element.addClass('postbox');
 			}
 		};
 	})

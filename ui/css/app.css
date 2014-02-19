@@ -15,3 +15,7 @@ textarea {
 .postbox i:hover {
 	color: dimgrey;
 }
+
+.postbox input[type=radio] {
+	display: none;
+}

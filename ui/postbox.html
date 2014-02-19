@@ -1,26 +1,26 @@
-<div class='small-12 columns'>
+<div class="small-12 columns">
   <form>
-	<div class='row'><div class='small-12 columns'>
-		<textarea rows='5'></textarea>
+	<div class="row"><div class="small-12 columns">
+		<textarea rows="5"></textarea>
 	</div></div>
-	<div class="row collapse">
+	<div class="row collapse" ng-show="showUrl()">
       <div class="small-1 columns">
-		<span class="prefix">Url</span>
+		<span class="prefix" ng-bind="postType"></span>
       </div>
       <div class="small-11 columns">
 		<input type="text" placeholder="Enter your URL...">
       </div>
 	</div>
-	<div class='row'><div class='small-12 columns'>
-		<ul class='small-block-grid-4'>
-		  <li><i class='fi-pencil' style='color: {{icons["fi-pencil"]}}'></i></li>
-		  <li><i class='fi-link'></i></li>
-		  <li><i class='fi-photo'></i></li>
-		  <li><i class='fi-video'></i></li>
+	<div class="row"><div class="small-12 columns">
+		<ul class="small-block-grid-4">
+		  <li ng-repeat="pt in postTypes">
+			<input type="radio" name="postType" ng-model="$parent.postType" id="{{pt}}" value="{{pt}}"></input>
+			<label for="{{pt}}"><i class="{{postData[pt].name}}" ng-style="postStyle('{{pt}}')"></i></label>
+		  </li>
 		</ul>
 	</div></div>
-	<div class='row'><div class='small-12 columns'>
-		<a href='#' class='button small'>Publish</a>
+	<div class="row"><div class="small-12 columns">
+		<a href="#" class="button small">Publish</a>
 	</div></div>
   </form>
 </div>
