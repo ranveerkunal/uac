@@ -1,10 +1,4 @@
-angular.module('getUpStandUp', [])
-	.directive('gconnect', function() {
-		return {
-			restrict: 'E',
-			templateUrl: 'ui/gconnect.html',
-		};
-	})
+angular.module('postbox', [])
 	.directive('postbox', function() {
 		return {
 			restrict: 'A',
