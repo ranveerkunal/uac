@@ -1,0 +1,17 @@
+textarea {
+    height: auto;
+}
+
+.postbox {
+	padding: 0.5em;
+	background-color: #F5F5F5;
+}
+
+.postbox i {
+	font-size: 2em;
+	color: darkgrey;
+}
+
+.postbox i:hover {
+	color: dimgrey;
+}
