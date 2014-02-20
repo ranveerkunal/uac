@@ -3,12 +3,12 @@ textarea {
 }
 
 .postbox {
-	padding: 0.5em;
+	padding: 0.5em, 0.5em;
 	background-color: #F5F5F5;
 }
 
 .postbox i {
-	font-size: 2em;
+	font-size: 6em;
 	color: darkgrey;
 }
 
@@ -18,4 +18,12 @@ textarea {
 
 .postbox input[type=radio] {
 	display: none;
+}
+
+.postbox .fi-share, .postbox .fi-share:hover {
+	color: #427FED;
+}
+
+.postbox .fi-x {
+	color: lightgrey;
 }

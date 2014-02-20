@@ -4,7 +4,7 @@ angular.module('postbox', [])
 			restrict: 'A',
 			templateUrl: 'ui/postbox.html',
 			link: function(scope, element, attr) {
-				scope.postType = 'Text'
+				scope.postType = '';
 				scope.postTypes = ['Text', 'Link', 'Photo', 'Video'];
 				scope.postData = {
 					'Text' : {name:'fi-pencil', color:'#53A93F'},
@@ -13,14 +13,10 @@ angular.module('postbox', [])
 					'Video': {name:'fi-video', color:'#CB4437'},
 				};
 				scope.postStyle = function(type) {
-					if (scope.postType == type) return {color : scope.postData[type].color};
-					return '';
+					if (scope.postType == '') return {'color':scope.postData[type].color, 'opacity':'0.5'};
+					if (scope.postType == type) return {'color':scope.postData[type].color, 'font-size':'4em'};
+					return {'font-size':'4em'};
 				}
-				scope.showUrl = function() {
-					if (scope.postType == 'Text' || scope.postType == 'Photo') return false;
-					return true;
-				}
-
 				element.addClass('postbox');
 			}
 		};
