@@ -1,1 +1,1 @@
-angular.module('getUpStandUp', ['gconnect', 'postbox'])
+angular.module('getUpStandUp', ['fb', 'postbox'])
