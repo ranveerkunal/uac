@@ -1,5 +1,28 @@
 angular.module('fb', [])
-    .directive('fb', function() {
+	.factory('$fb', function() {
+		var init = function(scope) {
+			fb = this;
+			FB.api("/me", function(response) {
+				if (response && !response.error) {
+					scope.$apply(function() {
+						fb.me = response;
+					});
+				}
+			});
+		}
+
+		var ready = function() {
+			return this.me != undefined;
+		}
+
+		return {
+			auth: undefined,
+			me: undefined,
+			init: init,
+			ready: ready,
+		}
+	})
+    .directive('fb', ['$fb', function(fb) {
         return {
             restrict: 'E',
             replace: true,
@@ -8,7 +31,12 @@ angular.module('fb', [])
 				'appId': '=appId',
 			},
 			link: function(scope, element, attr) {
-				scope.loaded = false;
+				scope.fb = fb;
+				scope.login = function(response) {
+					fb.auth = response;
+					fb.init(scope);
+				}
+
 				window.fbAsyncInit = function() {
 					FB.init({
 						appId      : scope.appId,
@@ -18,9 +46,7 @@ angular.module('fb', [])
 					});
 
 					FB.Event.subscribe('auth.authResponseChange', function(response) {
-						if (response.status === 'connected') {
-							scope.$apply('loaded = true');
-						}
+						if (response.status === 'connected') scope.$apply(scope.login(response));
 						else if (response.status === 'not_authorized') FB.login();
 						else FB.login();
 					});
@@ -36,4 +62,4 @@ angular.module('fb', [])
 				}(document));
 			},
         };
-    });
+    }]);

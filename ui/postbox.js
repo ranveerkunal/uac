@@ -1,9 +1,10 @@
-angular.module('postbox', [])
-	.directive('postbox', function() {
+angular.module('postbox', ['fb'])
+	.directive('postbox', ['$fb', function(fb) {
 		return {
 			restrict: 'A',
 			templateUrl: 'ui/postbox.html',
 			link: function(scope, element, attr) {
+				scope.fb = fb;
 				scope.postType = '';
 				scope.postTypes = ['Text', 'Link', 'Photo', 'Video'];
 				scope.postData = {
@@ -20,4 +21,4 @@ angular.module('postbox', [])
 				element.addClass('postbox');
 			}
 		};
-	})
+	}])

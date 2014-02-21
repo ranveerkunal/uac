@@ -1,5 +1,6 @@
 <div class="small-12 columns">
-  <form>
+  <span ng-hide="fb.ready()"><blockquote>“The truth is, everyone is going to hurt you. You just got to find the ones worth suffering for.”<cite>Bob Marley</cite></blockquote></span>
+  <form ng-show="fb.ready()">
 	<div class="row" style="text-align: center"><div class="small-12 columns">
 		<ul class="small-block-grid-4">
 		  <li ng-repeat="pt in postTypes">
