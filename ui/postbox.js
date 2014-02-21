@@ -1,10 +1,10 @@
 angular.module('postbox', ['fb'])
-	.directive('postbox', ['$fb', function(fb) {
+	.directive('postbox', ['$fb', function(postman) {
 		return {
 			restrict: 'A',
 			templateUrl: 'ui/postbox.html',
 			link: function(scope, element, attr) {
-				scope.fb = fb;
+				scope.postman = postman;
 				scope.postType = '';
 				scope.postTypes = ['Text', 'Link', 'Photo', 'Video'];
 				scope.postData = {
