@@ -1,65 +1,48 @@
-angular.module('fb', [])
-	.factory('$fb', function() {
-		var init = function(scope) {
-			fb = this;
-			FB.api("/me", function(response) {
-				if (response && !response.error) {
-					scope.$apply(function() {
-						fb.me = response;
-					});
-				}
-			});
-		}
+angular.module('fb', ['ngFacebook'])
+	.provider('$fb', function() {
+		this.$get = ['$q', '$facebook', function($q, $facebook) {
+			var $fb = $q.defer();
 
-		var ready = function() {
-			return this.me != undefined;
-		}
+			$fb.Plugged = function() {
+				return $facebook.getLoginStatus();
+			}
 
-		return {
-			auth: undefined,
-			me: undefined,
-			init: init,
-			ready: ready,
-		}
-	})
-    .directive('fb', ['$fb', function(fb) {
-        return {
-            restrict: 'E',
-            replace: true,
-            templateUrl: 'ui/fb.html',
-			scope: {
-				'appId': '=appId',
-			},
-			link: function(scope, element, attr) {
-				scope.fb = fb;
-				scope.login = function(response) {
-					fb.auth = response;
-					fb.init(scope);
-				}
+			$fb.Plug = function() {
+				var deferred = $q.defer();
+				FB.login(function(response) {
+					if (response.authResponse) {
+						console.log('Welcome!  Fetching your information.... ');
+						FB.api('/me', function(response) {
+							deferred.resolve(response);
+							console.log('Good to see you, ' + response.name + '.');
+						});
+					} else {
+						console.log('User cancelled login or did not fully authorize.');
+					}
+				});
+				return deferred.promise;
+			}
 
-				window.fbAsyncInit = function() {
-					FB.init({
-						appId      : scope.appId,
-						status     : true, // check login status
-						cookie     : true, // enable cookies to allow the server to access the session
-						xfbml      : true  // parse XFBML
-					});
+			$fb.Name = function() {
+				var deferred = $q.defer();
+				console.log("Name");
+				$facebook.api("/me").then(function(response) {
+					console.log(response);
+					return deferred.resolve(response.name);
+				});
+				return deferred.promise;
+			};
 
-					FB.Event.subscribe('auth.authResponseChange', function(response) {
-						if (response.status === 'connected') scope.$apply(scope.login(response));
-						else if (response.status === 'not_authorized') FB.login();
-						else FB.login();
-					});
-				};
+			$fb.Cover = function() {
+				console.log("Cover");
+				var deferred = $q.defer();
+				$facebook.api("/me/picture").then(function(response) {
+					console.log(response);
+					return deferred.resolve(response.data.url);
+				});
+				return deferred.promise;
+			};
 
-				// Load the SDK asynchronously
-				(function(d){
-					var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-					if (d.getElementById(id)) {return;}
-					js = d.createElement('script'); js.id = id; js.async = true;
-					js.src = '//connect.facebook.net/en_US/all.js';
-					ref.parentNode.insertBefore(js, ref);
-				}(document));
-			},
-        };
-    }]);
+			return $fb;
+		}];
+	});

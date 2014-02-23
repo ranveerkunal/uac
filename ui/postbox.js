@@ -1,10 +1,9 @@
 angular.module('postbox', ['fb'])
-	.directive('postbox', ['$fb', function(postman) {
+	.directive('postbox', ['$fb', function($postman) {
 		return {
 			restrict: 'A',
 			templateUrl: 'ui/postbox.html',
 			link: function(scope, element, attr) {
-				scope.postman = postman;
 				scope.postType = '';
 				scope.postTypes = ['Text', 'Link', 'Photo', 'Video'];
 				scope.postData = {
@@ -18,7 +17,17 @@ angular.module('postbox', ['fb'])
 					if (scope.postType == type) return {'color':scope.postData[type].color, 'font-size':'4em'};
 					return {'font-size':'4em'};
 				}
+				scope.click = function() {
+					var body = 'Reading JS SDK documentation';
+					FB.api('/me/feed', 'post', { message: body }, function(response) {
+						if (!response || response.error) {
+							console.log(response);
+						} else {
+							console.log('Post ID: ' + response.id);
+						}
+					});
+				}
 				element.addClass('postbox');
 			}
 		};
-	}])
+	}]);

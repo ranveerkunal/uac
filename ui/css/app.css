@@ -3,7 +3,6 @@ textarea {
 }
 
 .postbox {
-	padding: 0.5em, 0.5em;
 	background-color: #F5F5F5;
 }
 
@@ -26,4 +25,30 @@ textarea {
 
 .postbox .fi-x {
 	color: lightgrey;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.topbar {
+	background-image: url('../topbar.png');
+	background-size: 100%;
+	color: dimgrey;
+}
+
+.topbar .left {
+	background-color: whitesmoke;
+	font-size: 4em;
+	opacity: 0.6;
+}
+
+.topbar .right {
+	background-color: whitesmoke;
+	opacity: 0.6;
+}
+
+.topbar i {
+	font-size: 4em;
+	color: #293E6A;
 }

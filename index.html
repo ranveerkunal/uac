@@ -6,15 +6,16 @@
   <link rel="stylesheet" href="ui/fonts/foundation-icons.css">
   <link rel="stylesheet" href="ui/css/app.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/ng-facebook/ngFacebook.js"></script>
+
+  <script src="ui/app.js"></script>
   <script src="ui/fb.js"></script>
   <script src="ui/postbox.js"></script>
-  <script src="ui/app.js"></script>
+  <script src="ui/topbar.js"></script>
 </head>
 <body>
+  <div topbar></div>
   <div class="row" postbox></div>
-  <div class="row"><div class="small-12 columns">
-	  <fb app-id="254832841352030"></fb>
-  </div></div>
 </body>
 </html>
