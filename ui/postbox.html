@@ -1,8 +1,8 @@
 <div class="small-12 columns">
-  <h3 ng-hide="postman.ready()">
+  <h3 ng-hide="plugged">
 	<blockquote>“The truth is, everyone is going to hurt you. You just got to find the ones worth suffering for.”<cite>Bob Marley</cite></blockquote>
   </h3>
-  <form ng-show="postman.ready()">
+  <form ng-show="plugged">
 	<div class="row" style="text-align: center"><div class="small-12 columns">
 		<ul class="small-block-grid-4">
 		  <li ng-repeat="pt in postTypes">
@@ -12,13 +12,13 @@
 		</ul>
 	</div></div>
 	<div class="row" ng-show="postType != ''"><div class="small-12 columns">
-		<textarea rows="10"></textarea>
+		<textarea rows="10" ng-model="fields.text"></textarea>
 	</div></div>
 	<div class="row collapse" ng-show="postType != '' && postType != 'Text'">
       <div class="small-12 columns">
-		<input type="text" placeholder="http://" ng-show="postType == 'Link'"></input>
-		<input type="file" class="button large secondary" name="image" accept="image/*;" capture ng-show="postType == 'Photo'"></input>
-		<input type="file" class="button large secondary" name="video" accept="video/*;" capture ng-show="postType == 'Video'"></input>
+		<input type="text" placeholder="http://" ng-show="show('Link')" ng-model="fields.Link"></input>
+		<input type="file" class="button large secondary" accept="image/*;" capture ng-show="show('Photo')" ng-model="fields.Photo" name="Photo" file-bind></input>
+		<input type="file" class="button large secondary" accept="video/*;" capture ng-show="show('Video')" ng-model="fields.Video" name="Video" file-bind></input>
       </div>
 	</div>
 	<div class="row" style="text-align:center" ng-show="postType != ''">

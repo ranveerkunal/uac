@@ -80,6 +80,19 @@ angular.module('fb', [])
 				}, {scope: $fb.Config('permissions')});
 				return deferred.promise;
 			}
+
+			$fb.Post = function(post) {
+				var deferred = $q.defer();
+				FB.api('/me/feed', 'post', { message: post.text }, function(response) {
+					if (!response || response.error) {
+						deferred.resolve("");
+						return;
+					}
+					deferred.resolve(response.id);
+					console.log('Post: ' + response);
+				});
+			}
+
 			return $fb;
 		}];
 	})

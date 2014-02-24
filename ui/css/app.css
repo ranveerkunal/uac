@@ -35,6 +35,8 @@ textarea {
 	background-image: url('../topbar.png');
 	background-size: 100%;
 	color: dimgrey;
+	height: 4em;
+	overflow: hidden;
 }
 
 .topbar i {
