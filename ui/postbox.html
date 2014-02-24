@@ -17,8 +17,8 @@
 	<div class="row collapse" ng-show="postType != '' && postType != 'Text'">
       <div class="small-12 columns">
 		<input type="text" placeholder="http://" ng-show="show('Link')" ng-model="fields.Link"></input>
-		<input type="file" class="button large secondary" accept="image/*;" capture ng-show="show('Photo')" ng-model="fields.Photo" name="Photo" file-bind></input>
-		<input type="file" class="button large secondary" accept="video/*;" capture ng-show="show('Video')" ng-model="fields.Video" name="Video" file-bind></input>
+		<input type="file" class="button large secondary" accept="image/*;" capture ng-show="show('Photo')" name="Photo" file-bind></input>
+		<input type="file" class="button large secondary" accept="video/*;" capture ng-show="show('Video')" name="Video" file-bind></input>
       </div>
 	</div>
 	<div class="row" style="text-align:center" ng-show="postType != ''">

@@ -4,6 +4,7 @@ angular.module('postbox', ['fb'])
 			restrict: 'A',
 			templateUrl: 'ui/postbox.html',
 			link: function(scope, element, attr) {
+				scope.fields = {};
 				scope.plugged = false;
 				$sn.Plugged().then(function(response) {
 					scope.plugged = response;
@@ -29,9 +30,7 @@ angular.module('postbox', ['fb'])
 				// Show
 				scope.show = function(name) {
 					if (scope.postType == name) return true;
-					scope.fields[name] = '';
-					console.log('show');
-					console.log(scope.fields);
+					delete scope.fields[name];
 					return false;
 				}
 				element.addClass('postbox');
@@ -41,18 +40,11 @@ angular.module('postbox', ['fb'])
 	.directive('fileBind', function() {
 		return {
 			restrict: 'A',
-			transclude: true,
-			link: function( scope, element, attrs ) {
-				if (scope.fields == undefined) scope.fields = {};
-				scope.fields[name] = '';
+			link: function(scope, element, attr) {
 				element.bind('change', function(event) {
 					scope.$apply(function() {
-						scope.fields[attrs.name] = event.target.files[0];
-						console.log(scope.fields);
+						scope.fields[attr.name] = event.target.files[0];
 					});
-				});
-				scope.$watch(scope.fields[attrs.name], function(file) {
-					console.log(file);
 				});
 			}
 		};
