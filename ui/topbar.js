@@ -1,22 +1,14 @@
 angular.module('topbar', ['fb'])
 	.directive('topbar', ['$fb', function($sn) {
 		var init = function(scope) {
-			scope.plugged = "";
+			scope.plugged = false;
 			scope.name = "";
 			scope.cover = "";
 			$sn.Plugged().then(function(response) {
-				console.log("Plugged");
-				scope.plugged = response.status;
-				if (scope.plugged == "connected") {
-					$sn.Name().then(function(name) {
-						console.log(name)
-						scope.name = name;
-					});
-					$sn.Cover().then(function(cover) {
-						console.log(cover)
-						scope.cover = cover;
-					});
-					console.log(scope.plugged);
+				scope.plugged = response;
+				if (scope.plugged) {
+					scope.name = $sn.Name;
+					scope.cover = $sn.Cover;
 				}
 			});
 		}
@@ -26,9 +18,15 @@ angular.module('topbar', ['fb'])
 			link: function(scope, element, attr) {
 				init(scope);
 				scope.plug = function() {
-					$sn.Plug().then(function(response) {
-						init(scope);
-					});
+					console.log(this);
+					$sn.Plug().then(
+						function(response) {
+							init(scope);
+						},
+						function(error) {
+							console.log(error);
+						}
+					);
 				}
 				element.addClass('topbar');
 			}

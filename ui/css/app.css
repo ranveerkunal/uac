@@ -37,6 +37,11 @@ textarea {
 	color: dimgrey;
 }
 
+.topbar i {
+	font-size: 4em;
+	color: #293E6A;
+}
+
 .topbar .left {
 	background-color: whitesmoke;
 	font-size: 4em;
@@ -45,10 +50,15 @@ textarea {
 
 .topbar .right {
 	background-color: whitesmoke;
+	color: black;
 	opacity: 0.6;
 }
 
-.topbar i {
-	font-size: 4em;
-	color: #293E6A;
+.topbar .right img {
+	height: 4em;
+}
+
+.topbar .right span {
+	margin: 0.2em;
+	opacity: 1.0;
 }

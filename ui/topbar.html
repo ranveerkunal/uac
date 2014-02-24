@@ -1,9 +1,9 @@
 <div class="row">
   <div class="small-8 columns left"><b>Get Up Stand Up</b></div>
   <div class="small-4 columns right"><div class="row" style="text-align: right;">
-	  <div class="small-12 columns" ng-hide="plugged == '' || plugged == 'connected'"><i class="fi-social-facebook pointer" ng-click="plug()"></i></div>
-	  <div class="small-12 columns" ng-show="plugged == 'connected'">
-		<span style="font-size: 1em; height: 100%" ng-bind="name"></span><span style="hieght: 100%"><img src={{cover}}></img></span>
+	  <div class="small-12 columns" ng-hide="plugged"><i class="fi-social-facebook pointer" ng-click="plug()"></i></div>
+	  <div class="small-12 columns" ng-show="plugged">
+		<span ng-bind="name"></span><span><img src={{cover}}></img></span>
 	  </div>
   </div></div>
 </div>
