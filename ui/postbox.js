@@ -1,4 +1,4 @@
-angular.module('postbox', ['fb'])
+angular.module('postbox', ['fb', 'flow'])
 	.directive('postbox', ['$fb', function($sn) {
 		return {
 			restrict: 'A',
