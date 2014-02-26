@@ -17,20 +17,7 @@
 	<div class="row collapse" ng-show="postType != '' && postType != 'Text'">
       <div class="small-12 columns">
 		<input type="text" placeholder="http://" ng-show="show('Link')" ng-model="fields.Link"></input>
-		<div flow-init>
-		  <div class="thumbnail" ng-hide="$flow.files.length">
-			<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
-		  </div>
-		  <div class="thumbnail" ng-show="$flow.files.length">
-			<img flow-img="$flow.files[0]" />
-		  </div>
-		  <a href="#" class="button" ng-hide="$flow.files.length" flow-btn>Select image</a>
-		  <a href="#" class="button" ng-show="$flow.files.length" flow-btn>Change</a>
-		  <a href="#" class="button" ng-show="$flow.files.length"
-			 ng-click="$flow.cancel()">
-			Remove
-		  </a>
-		</div>
+		<div noimage="ui/noimage.gif" fileinput></div>
       </div>
 	</div>
 	<div class="row" style="text-align:center" ng-show="postType != ''">

@@ -37,15 +37,9 @@ angular.module('postbox', ['fb', 'flow'])
 			}
 		};
 	}])
-	.directive('fileBind', function() {
+	.directive('fileinput', function() {
 		return {
 			restrict: 'A',
-			link: function(scope, element, attr) {
-				element.bind('change', function(event) {
-					scope.$apply(function() {
-						scope.fields[attr.name] = event.target.files[0];
-					});
-				});
-			}
+			templateUrl: 'ui/fileinput.html',
 		};
 	});
