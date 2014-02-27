@@ -29,9 +29,7 @@ angular.module('postbox', ['fb', 'flow'])
 
 				// Show
 				scope.show = function(name) {
-					if (scope.postType == name) return true;
-					delete scope.fields[name];
-					return false;
+					return scope.postType == name;
 				}
 				element.addClass('postbox');
 			}

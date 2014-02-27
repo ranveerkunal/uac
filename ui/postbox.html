@@ -17,7 +17,7 @@
 	<div class="row collapse" ng-show="postType != '' && postType != 'Text'">
       <div class="small-12 columns">
 		<input type="text" placeholder="http://" ng-show="show('Link')" ng-model="fields.Link"></input>
-		<div noimage="ui/noimage.gif" fileinput></div>
+		<div ng-show="show('Photo')" fileinput></div>
       </div>
 	</div>
 	<div class="row" style="text-align:center" ng-show="postType != ''">
