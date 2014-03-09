@@ -12,12 +12,12 @@
 		</ul>
 	</div></div>
 	<div class="row" ng-show="postType != ''"><div class="small-12 columns">
-		<textarea rows="10" ng-model="fields.text"></textarea>
+		<textarea rows="10" ng-model="fields.Text"></textarea>
 	</div></div>
 	<div class="row collapse" ng-show="postType != '' && postType != 'Text'">
       <div class="small-12 columns">
 		<input type="text" placeholder="http://" ng-show="show('Link')" ng-model="fields.Link"></input>
-		<div ng-show="show('Photo')" fileinput></div>
+		<div ng-show="show('Photo')" ng-model="fields.Photo" flow-init fileinput></div>
       </div>
 	</div>
 	<div class="row" style="text-align:center" ng-show="postType != ''">

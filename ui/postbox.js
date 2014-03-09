@@ -37,7 +37,18 @@ angular.module('postbox', ['fb', 'flow'])
 	}])
 	.directive('fileinput', function() {
 		return {
+			require:"ngModel",
 			restrict: 'A',
 			templateUrl: 'ui/fileinput.html',
+			link: function(scope, element, attr, ngModel) {
+				scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+					ngModel.$setViewValue(flowFile.file);
+					var reader = new FileReader();
+					reader.onload = function(file) {
+						console.log(file.target.result);
+					}
+					reader.readAsBinaryString(flowFile.file);
+				});
+			}
 		};
 	});
