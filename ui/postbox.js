@@ -47,6 +47,8 @@ angular.module('postbox', ['fb'])
 				scope.remove = function() {
 					scope.src = undefined;
 					ngModel.$setViewValue('');
+					var f = element.find('input');
+					f.replaceWith(f.clone());
 				}
 
 				element.bind('change', function(event) {
