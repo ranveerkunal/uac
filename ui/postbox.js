@@ -1,4 +1,4 @@
-angular.module('postbox', ['fb', 'flow'])
+angular.module('postbox', ['fb'])
 	.directive('postbox', ['$fb', function($sn) {
 		return {
 			restrict: 'A',
@@ -36,18 +36,30 @@ angular.module('postbox', ['fb', 'flow'])
 		};
 	}])
 	.directive('fileinput', function() {
+		var hexToBase64 = function(str) {
+			return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, '').replace(/([\da-fA-F]{2}) ?/g, '0x$1 ').replace(/ +$/, '').split(' ')));
+		}
 		return {
-			require:"ngModel",
+			require:'ngModel',
 			restrict: 'A',
 			templateUrl: 'ui/fileinput.html',
 			link: function(scope, element, attr, ngModel) {
-				scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
-					ngModel.$setViewValue(flowFile.file);
-					var reader = new FileReader();
-					reader.onload = function(file) {
-						console.log(file.target.result);
-					}
-					reader.readAsBinaryString(flowFile.file);
+				scope.remove = function() {
+					scope.src = undefined;
+					ngModel.$setViewValue('');
+				}
+
+				element.bind('change', function(event) {
+					scope.$apply(function() {
+						var reader = new FileReader();
+						reader.onload = function(file) {
+							ngModel.$setViewValue(file.target.result);
+							scope.$apply(function() {
+								scope.src = 'data:image/jpeg;base64,' + btoa(file.target.result);
+							});
+						}
+						reader.readAsBinaryString(event.target.files[0]);
+					});
 				});
 			}
 		};

@@ -1,7 +1,9 @@
 <div>
-  <a href="#" class="button small" flow-btn>Select</a>
-  <div class="thumbnail" ng-show="$flow.files.length" style="display: inline-block; position: relative;">
-	<img style="max-height: 15em;" flow-img="$flow.files[0]" />
-	<a href="#" class="button alert tiny" ng-click="$flow.cancel()" style="position: absolute; left: 0px; bottom: 0px;">Remove</a>
+  <a href="#" class="button small">Select
+	<input type="file" accept="image/*;capture=camera" style="position: absolute; top: 0px; right: 0px; font-size: 118px; margin: 0px; padding: 0px; opacity: 0; cursor: pointer;" \>
+  </a>
+  <div class="thumbnail" ng-show="src != undefined" style="display: inline-block; position: relative;">
+	<img style="max-height: 15em;" ng-src="{{src}}" />
+	<a href="#" class="button alert tiny" ng-click="remove()" style="position: absolute; left: 0px; bottom: 0px;">Remove</a>
   </div>
 </div>
